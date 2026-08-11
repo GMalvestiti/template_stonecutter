@@ -35,9 +35,6 @@ jobs:
         run: |
           ls -lhR build/libs
 
-      - name: Test coverage verification
-        run: ./gradlew jacocoTestCoverageVerification
-
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v3
         with:

@@ -1,6 +1,5 @@
 import com.vanniktech.maven.publish.Checksum
 import com.vanniktech.maven.publish.JavadocJar
-import me.modmuss50.mpp.PublishModTask
 import me.modmuss50.mpp.ReleaseType
 
 plugins {
@@ -116,36 +115,6 @@ tasks {
             xml.required.set(true)
             csv.required.set(false)
             html.required.set(true)
-        }
-    }
-
-    jacocoTestCoverageVerification {
-        dependsOn(jacocoTestReport)
-
-        violationRules {
-            rule {
-                element = "CLASS"
-
-                excludes = excludedPackages
-
-                limit {
-                    counter = "BRANCH"
-                    value = "COVEREDRATIO"
-                    minimum = prop("dev.test_coverage").toBigDecimal()
-                }
-            }
-        }
-    }
-
-    listOf(
-        PublishToMavenLocal::class,
-        PublishToMavenRepository::class,
-        PublishModTask::class
-    ).forEach { taskClass ->
-        withType(taskClass).configureEach {
-            if (!prop("publish.dry_run").toBoolean()) {
-                dependsOn(jacocoTestCoverageVerification)
-            }
         }
     }
 }

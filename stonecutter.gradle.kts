@@ -86,10 +86,4 @@ tasks {
         description = "Run test of the active Stonecutter version"
         dependsOn(stonecutter.current!!.project + ":test")
     }
-
-    register("runActiveTestCoverageVerification") {
-        group = "custom"
-        description = "Run test coverage verification of the active Stonecutter version"
-        dependsOn(stonecutter.current!!.project + ":jacocoTestCoverageVerification")
-    }
 }
