@@ -28,8 +28,9 @@
   ],
   "accessWidener": "${id}.ct",
   "depends": {
+    "minecraft": "${minecraft}",
     "fabricloader": ">=${fabric_loader}",
     "fabric-api": ">=${fabric_api}",
-    "minecraft": "${minecraft}"
+    "easyconfig": ">=${easyconfig}"
   }
 }

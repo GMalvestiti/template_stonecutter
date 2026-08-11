@@ -89,6 +89,13 @@ neoForge {
 }
 
 dependencies {
+    jarJar(implementation("com.gmalvestiti.minecraft:easyconfig-neoforge") {
+        version {
+            strictly("[${property("deps.easyconfig")},)")
+            prefer("${property("deps.easyconfig")}")
+        }
+    })
+
     jarJar(implementation("com.github.ben-manes.caffeine:caffeine") {
         version {
             prefer("${property("deps.caffeine")}")
@@ -142,6 +149,7 @@ tasks {
             register("contact_issues", "mod.contact_issues")
             register("license", "mod.license")
             register("neoforge_loader", "deps.neoforge_loader")
+            register("easyconfig", "deps.easyconfig")
         }
 
         filesMatching("META-INF/neoforge.mods.toml") { expand(props) }

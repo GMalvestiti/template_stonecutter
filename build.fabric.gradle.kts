@@ -86,8 +86,8 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
 
-//    modImplementation("com.gmalvestiti.minecraft:easyconfig-fabric:${property("deps.easyconfig")}")
-//    include("com.gmalvestiti.minecraft:easyconfig-fabric:${property("deps.easyconfig")}")
+    modImplementation("com.gmalvestiti.minecraft:easyconfig-fabric:${property("deps.easyconfig")}")
+    include("com.gmalvestiti.minecraft:easyconfig-fabric:${property("deps.easyconfig")}")
 
     shadow("com.github.ben-manes.caffeine:caffeine:${property("deps.caffeine")}")
 
@@ -128,10 +128,16 @@ tasks {
         shadowJar {
             archiveClassifier.set("")
         }
+
+        jar {
+            archiveClassifier.set("plain")
+        }
     }
 
     shadowJar {
         dependsOn(jar)
+
+        from(zipTree(jar.flatMap { it.archiveFile }))
 
         configurations = listOf(project.configurations.shadow.get())
 
@@ -165,6 +171,7 @@ tasks {
             register("license", "mod.license")
             register("fabric_loader", "deps.fabric_loader")
             register("fabric_api", "deps.fabric_api")
+            register("easyconfig", "deps.easyconfig")
         }
 
         filesMatching("fabric.mod.json") { expand(props) }

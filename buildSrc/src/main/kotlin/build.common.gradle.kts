@@ -18,6 +18,9 @@ repositories {
         forRepository { maven(url) { name = alias } }
         filter { groups.forEach(::includeGroup) }
     }
+
+    mavenLocal()
+    mavenCentral()
     strictMaven("https://www.cursemaven.com", "CurseForge", "curse.maven")
     strictMaven("https://api.modrinth.com/maven", "Modrinth", "maven.modrinth")
 }
