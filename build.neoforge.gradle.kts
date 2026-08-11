@@ -1,12 +1,10 @@
-import org.gradle.kotlin.dsl.configureEach
-
 plugins {
     id("build.common")
     id("neoforge.mutex")
     id("net.neoforged.moddev") version "2.0.142"
 }
 
-version = "${sc.current.version}-${property("mod.version")}"
+version = "${property("mod.version")}+${sc.current.version}"
 
 if (property("dev.snapshot").toString().toBoolean()) {
     version = "$version-SNAPSHOT"

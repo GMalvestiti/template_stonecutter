@@ -1,5 +1,3 @@
-import org.gradle.kotlin.dsl.configureEach
-
 plugins {
     id("build.common")
     id("dev.kikugie.loom-back-compat")
@@ -7,7 +5,7 @@ plugins {
 }
 
 // DO NOT set group = ...!
-version = "${sc.current.version}-${property("mod.version")}"
+version = "${property("mod.version")}+${sc.current.version}"
 
 if (property("dev.snapshot").toString().toBoolean()) {
     version = "$version-SNAPSHOT"
@@ -87,6 +85,9 @@ dependencies {
 
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
+
+//    modImplementation("com.gmalvestiti.minecraft:easyconfig-fabric:${property("deps.easyconfig")}")
+//    include("com.gmalvestiti.minecraft:easyconfig-fabric:${property("deps.easyconfig")}")
 
     shadow("com.github.ben-manes.caffeine:caffeine:${property("deps.caffeine")}")
 
