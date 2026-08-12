@@ -1,7 +1,6 @@
 package com.gmalvestiti.minecraft.template.mixin;
 
 import com.gmalvestiti.minecraft.template.TemplateCommon;
-import com.gmalvestiti.minecraft.template.config.Config;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -18,24 +17,13 @@ public class TemplateMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public void onLoad(String mixinPackage) {
-        try {
-            this.mixinPackage = mixinPackage;
-
-            CONFIG = new Config();
-            TemplateCommon.info("Configuration loaded.");
-        } catch (Exception e) {
-            TemplateCommon.error("Failed to load configuration. Check your template.json config file.", e);
-        }
+        this.mixinPackage = mixinPackage;
     }
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         if (Objects.nonNull(this.mixinPackage) && mixinClassName.startsWith(this.mixinPackage)) {
-            if (Objects.isNull(CONFIG)) {
-                TemplateCommon.info("Configuration is null. Defaulting mixin application to TRUE.");
-                return true;
-            }
-            return CONFIG.ENABLED;
+            return CONFIG.data().enabled;
         }
         return true;
     }
