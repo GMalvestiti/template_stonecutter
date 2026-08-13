@@ -123,9 +123,7 @@ tasks {
 
         inputs.property("version", project.property("mod.version"))
 
-        from(
-            jar.flatMap { it.archiveFile }
-        )
+        from(jar.flatMap { it.archiveFile })
 
         into(rootProject.layout.buildDirectory.file("libs/${project.property("mod.version")}"))
     }

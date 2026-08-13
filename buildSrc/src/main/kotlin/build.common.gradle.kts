@@ -87,6 +87,21 @@ tasks {
         options.encoding = "UTF-8"
     }
 
+    withType<Javadoc>().configureEach {
+
+        exclude("**/*")
+
+        (options as StandardJavadocDocletOptions).apply {
+            encoding = "UTF-8"
+            docEncoding = "UTF-8"
+            charSet = "UTF-8"
+
+            addBooleanOption("Xdoclint:all,-missing", true)
+
+            links("https://docs.oracle.com/en/java/javase/25/docs/api/")
+        }
+    }
+
     test {
         workingDir = project.layout.projectDirectory.dir("runTest").asFile
 
