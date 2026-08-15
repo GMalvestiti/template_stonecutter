@@ -29,6 +29,7 @@ val requiredJava = when {
 }
 
 java {
+    withJavadocJar()
     withSourcesJar()
     targetCompatibility = requiredJava
     sourceCompatibility = requiredJava
@@ -91,7 +92,12 @@ neoForge {
 }
 
 dependencies {
-
+    jarJar(implementation("com.gmalvestiti.minecraft:easyconfig-neoforge:${property("deps.easyconfig")}") {
+        version {
+            strictly("[${property("deps.easyconfig")},)")
+            prefer("${property("deps.easyconfig")}")
+        }
+    })
 }
 
 tasks {
@@ -127,6 +133,7 @@ tasks {
             register("contact_issues", "mod.contact_issues")
             register("license", "mod.license")
             register("neoforge_loader", "deps.neoforge_loader")
+            register("easyconfig", "deps.easyconfig")
         }
 
         filesMatching("META-INF/neoforge.mods.toml") { expand(props) }
@@ -141,6 +148,18 @@ tasks {
 
     named("createMinecraftArtifacts") {
         dependsOn("stonecutterGenerate")
+    }
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            named<MavenPublication>("mavenJava") {
+                artifact(distributionJar) {
+                    classifier = ""
+                }
+            }
+        }
     }
 }
 

@@ -19,7 +19,7 @@ mod.contact_issues="https://github.com/GMalvestiti/template/issues"
 mod.license="MIT"
 
 dev.debug=false
-dev.javadoc=false
+dev.javadoc=true
 dev.snapshot=false
 dev.username="Riser876"
 dev.uuid="13957e2e-2731-4479-8a6d-d42f89f8d756"
@@ -36,6 +36,7 @@ publish.dry_run=true
 
 ["1.21"]
 
+deps.easyconfig="1.0.0"
 publish.start="1.21"
 publish.end="1.21.11"
 
@@ -51,6 +52,7 @@ deps.neoforge_loader="21.0.167"
 
 ["26.1"]
 
+deps.easyconfig="2.0.0"
 publish.start="26.1"
 publish.end="latest"
 
