@@ -18,6 +18,8 @@ sourceSets.main {
     resources.exclude("**/.cache")
 }
 
+val distributionJar: Provider<RegularFile> = tasks.shadowJar.flatMap { it.archiveFile }
+
 val requiredJava = when {
     sc.current.parsed >= "26.1" -> JavaVersion.VERSION_25
     sc.current.parsed >= "1.20.5" -> JavaVersion.VERSION_21
@@ -89,29 +91,7 @@ neoForge {
 }
 
 dependencies {
-    jarJar(implementation("com.gmalvestiti.minecraft:easyconfig-neoforge") {
-        version {
-            strictly("[${property("deps.easyconfig")},)")
-            prefer("${property("deps.easyconfig")}")
-        }
-    })
 
-    jarJar(implementation("com.github.ben-manes.caffeine:caffeine") {
-        version {
-            prefer("${property("deps.caffeine")}")
-        }
-    })
-    if (sc.current.parsed < "1.21.9") {
-        "additionalRuntimeClasspath"("com.github.ben-manes.caffeine:caffeine:${property("deps.caffeine")}")
-    }
-
-    testImplementation(platform("org.junit:junit-bom:${property("deps.junit")}"))
-
-    testImplementation("org.junit.jupiter:junit-jupiter")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
-    testImplementation("org.mockito:mockito-core:${property("deps.mockito")}")
-    testImplementation("org.mockito:mockito-junit-jupiter:${property("deps.mockito")}")
 }
 
 tasks {
@@ -123,7 +103,7 @@ tasks {
 
         inputs.property("version", project.property("mod.version"))
 
-        from(jar.flatMap { it.archiveFile })
+        from(distributionJar)
 
         into(rootProject.layout.buildDirectory.file("libs/${project.property("mod.version")}"))
     }
@@ -147,7 +127,6 @@ tasks {
             register("contact_issues", "mod.contact_issues")
             register("license", "mod.license")
             register("neoforge_loader", "deps.neoforge_loader")
-            register("easyconfig", "deps.easyconfig")
         }
 
         filesMatching("META-INF/neoforge.mods.toml") { expand(props) }
@@ -166,7 +145,7 @@ tasks {
 }
 
 publishMods {
-    file.set(tasks.jar.flatMap { it.archiveFile })
+    file.set(distributionJar)
     displayName.set("${property("mod.name")} NeoForge ${property("mod.version")} for ${property("publish.start")}")
     modLoaders.add("neoforge")
 

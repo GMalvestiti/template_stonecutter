@@ -1,7 +1,6 @@
 plugins {
     id("build.common")
     id("dev.kikugie.loom-back-compat")
-    id("com.gradleup.shadow") version "9.5.1"
 }
 
 // DO NOT set group = ...!
@@ -15,14 +14,6 @@ base.archivesName = "${property("mod.id")}-fabric"
 
 sourceSets.main {
     resources.exclude("**/.cache")
-}
-
-val shadowGroup: String = "${property("mod.group")}.${property("mod.id")}.shadow"
-
-configurations {
-    named("implementation") {
-        extendsFrom(configurations.shadow.get())
-    }
 }
 
 val distributionJar: Provider<RegularFile> = when {
@@ -86,19 +77,7 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
 
-    modImplementation("com.gmalvestiti.minecraft:easyconfig-fabric:${property("deps.easyconfig")}")
-    include("com.gmalvestiti.minecraft:easyconfig-fabric:${property("deps.easyconfig")}")
-
-    shadow("com.github.ben-manes.caffeine:caffeine:${property("deps.caffeine")}")
-
-    testImplementation(platform("org.junit:junit-bom:${property("deps.junit")}"))
     testImplementation("net.fabricmc:fabric-loader-junit:${property("deps.fabric_loader")}")
-
-    testImplementation("org.junit.jupiter:junit-jupiter")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
-    testImplementation("org.mockito:mockito-core:${property("deps.mockito")}")
-    testImplementation("org.mockito:mockito-junit-jupiter:${property("deps.mockito")}")
 }
 
 tasks {
@@ -120,35 +99,10 @@ tasks {
             dependsOn(shadowJar)
             inputFile.set(shadowJar.flatMap { it.archiveFile })
         }
-    } else {
-        assemble {
-            dependsOn(shadowJar)
-        }
 
         shadowJar {
-            archiveClassifier.set("")
+            archiveClassifier.set("shadow")
         }
-
-        jar {
-            archiveClassifier.set("plain")
-        }
-    }
-
-    shadowJar {
-        dependsOn(jar)
-
-        from(zipTree(jar.flatMap { it.archiveFile }))
-
-        configurations = listOf(project.configurations.shadow.get())
-
-        relocate("com.github.benmanes.caffeine", "${shadowGroup}.caffeine")
-        relocate("com.google.errorprone", "${shadowGroup}.errorprone")
-        relocate("org.jspecify", "${shadowGroup}.jspecify")
-
-        mergeServiceFiles()
-        addMultiReleaseAttribute.set(false)
-
-        exclude("META-INF/LICENSE", "META-INF/maven/**", "META-INF/versions/**/OSGI-INF/**")
     }
 
     processResources {
@@ -171,7 +125,6 @@ tasks {
             register("license", "mod.license")
             register("fabric_loader", "deps.fabric_loader")
             register("fabric_api", "deps.fabric_api")
-            register("easyconfig", "deps.easyconfig")
         }
 
         filesMatching("fabric.mod.json") { expand(props) }

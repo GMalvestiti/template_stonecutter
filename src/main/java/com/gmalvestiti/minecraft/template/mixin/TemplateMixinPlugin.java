@@ -1,6 +1,6 @@
 package com.gmalvestiti.minecraft.template.mixin;
 
-import com.gmalvestiti.minecraft.template.TemplateCommon;
+import com.gmalvestiti.minecraft.template.config.TemplateConfig;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -8,8 +8,6 @@ import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-
-import static com.gmalvestiti.minecraft.template.TemplateCommon.CONFIG;
 
 public class TemplateMixinPlugin implements IMixinConfigPlugin {
 
@@ -23,7 +21,7 @@ public class TemplateMixinPlugin implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         if (Objects.nonNull(this.mixinPackage) && mixinClassName.startsWith(this.mixinPackage)) {
-            return CONFIG.data().enabled;
+            return TemplateConfig.enabled;
         }
         return true;
     }

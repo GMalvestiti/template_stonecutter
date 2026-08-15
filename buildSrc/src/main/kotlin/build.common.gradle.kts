@@ -6,6 +6,7 @@ plugins {
     java
     idea
     jacoco
+    id("com.gradleup.shadow")
     id("com.vanniktech.maven.publish")
     id("me.modmuss50.mod-publish-plugin")
 }
@@ -23,6 +24,12 @@ repositories {
     mavenCentral()
     strictMaven("https://www.cursemaven.com", "CurseForge", "curse.maven")
     strictMaven("https://api.modrinth.com/maven", "Modrinth", "maven.modrinth")
+}
+
+configurations {
+    named("implementation") {
+        extendsFrom(configurations.shadow.get())
+    }
 }
 
 fun prop(property: String): String {
@@ -53,6 +60,8 @@ fun getReleaseType(): ReleaseType = when (prop("publish.type").trim().lowercase(
     else -> ReleaseType.STABLE
 }
 
+val shadowGroup: String = "${prop("mod.group")}.${prop("mod.id")}.shadow"
+
 val mockitoAgent = configurations.create("mockitoAgent")
 
 val rootPackage = "${prop("mod.group")}.${prop("mod.id")}"
@@ -65,6 +74,16 @@ val excludedPackages = listOf(
 )
 
 dependencies {
+    shadow("com.github.ben-manes.caffeine:caffeine:${prop("deps.caffeine")}")
+
+    testImplementation(platform("org.junit:junit-bom:${prop("deps.junit")}"))
+
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+    testImplementation("org.mockito:mockito-core:${prop("deps.mockito")}")
+    testImplementation("org.mockito:mockito-junit-jupiter:${prop("deps.mockito")}")
+
     mockitoAgent("org.mockito:mockito-core:${prop("deps.mockito")}") {
         isTransitive = false
     }
@@ -100,6 +119,33 @@ tasks {
 
             links("https://docs.oracle.com/en/java/javase/25/docs/api/")
         }
+    }
+
+    jar {
+        archiveClassifier.set("plain")
+    }
+
+    shadowJar {
+        dependsOn(jar)
+
+        archiveClassifier.set("")
+
+        from(zipTree(jar.flatMap { it.archiveFile }))
+
+        configurations = listOf(project.configurations.shadow.get())
+
+        relocate("com.github.benmanes.caffeine", "${shadowGroup}.caffeine")
+        relocate("com.google.errorprone", "${shadowGroup}.errorprone")
+        relocate("org.jspecify", "${shadowGroup}.jspecify")
+
+        mergeServiceFiles()
+        addMultiReleaseAttribute.set(false)
+
+        exclude("META-INF/LICENSE", "META-INF/maven/**", "META-INF/versions/**/OSGI-INF/**")
+    }
+
+    assemble {
+        dependsOn(shadowJar)
     }
 
     test {
