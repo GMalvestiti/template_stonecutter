@@ -4,7 +4,7 @@ plugins {
     id("net.neoforged.moddev") version "2.0.142"
 }
 
-version = "${property("mod.version")}+${sc.current.version}"
+version = "${property("mod.version")}-${sc.current.version}"
 
 if (property("dev.snapshot").toString().toBoolean()) {
     version = "$version-SNAPSHOT"
