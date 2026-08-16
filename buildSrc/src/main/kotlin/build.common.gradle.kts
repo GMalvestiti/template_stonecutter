@@ -21,6 +21,10 @@ repositories {
 
     mavenLocal()
     mavenCentral()
+    maven {
+        name = "SonatypeSnapshots"
+        url = uri("https://central.sonatype.com/repository/maven-snapshots/")
+    }
     strictMaven("https://www.cursemaven.com", "CurseForge", "curse.maven")
     strictMaven("https://api.modrinth.com/maven", "Modrinth", "maven.modrinth")
 }
