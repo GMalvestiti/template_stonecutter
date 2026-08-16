@@ -242,8 +242,8 @@ afterEvaluate {
                 url = uri(if (prop("dev.snapshot").toBoolean()) snapshotsRepoUrl else releasesRepoUrl)
 
                 credentials {
-                    username = project.findProperty("mavenCentralUsername")?.toString()
-                    password = project.findProperty("mavenCentralPassword")?.toString()
+                    username = providers.gradleProperty("mavenCentralUsername").orNull
+                    password = providers.gradleProperty("mavenCentralPassword").orNull
                 }
             }
         }
