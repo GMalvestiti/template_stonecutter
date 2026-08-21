@@ -24,7 +24,6 @@ stonecutter parameters {
     swaps["mod_id"] = "\"${properties.get<String>("mod.id")}\";"
     swaps["mod_version"] = "\"${properties.get<String>("mod.version")}\";"
     swaps["minecraft"] = "\"${node.metadata.version}\";"
-    dependencies["fapi"] = properties.getOrNull<String>("deps.fabric_api") ?: "0"
     constants["debug"] = properties.get<String>("dev.debug").toBoolean()
 
     replacements {
