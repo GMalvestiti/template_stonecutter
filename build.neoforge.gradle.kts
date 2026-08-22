@@ -60,6 +60,7 @@ neoForge {
 
         register("client") {
             client()
+            gameDirectory = file("../../runClient/")
             programArgument("--username=${property("dev.username")}")
             programArgument("--uuid=${property("dev.uuid")}")
         }
@@ -92,10 +93,10 @@ neoForge {
 }
 
 dependencies {
-    jarJar(implementation("com.gmalvestiti.minecraft:easyconfig-neoforge:${property("deps.easyconfig")}") {
+    jarJar(implementation("com.gmalvestiti.minecraft:liteconfig-neoforge:${property("deps.liteconfig")}") {
         version {
-            strictly("[${property("deps.easyconfig")},)")
-            prefer("${property("deps.easyconfig")}")
+            strictly("[${property("deps.liteconfig")},)")
+            prefer("${property("deps.liteconfig")}")
         }
     })
 }
@@ -133,7 +134,7 @@ tasks {
             register("contact_issues", "mod.contact_issues")
             register("license", "mod.license")
             register("neoforge_loader", "deps.neoforge_loader")
-            register("easyconfig", "deps.easyconfig")
+            register("liteconfig", "deps.liteconfig")
         }
 
         filesMatching("META-INF/neoforge.mods.toml") { expand(props) }

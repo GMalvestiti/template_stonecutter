@@ -1,7 +1,7 @@
 package com.gmalvestiti.minecraft.template;
 
-import com.gmalvestiti.minecraft.easyconfig.api.ConfigHolder;
-import com.gmalvestiti.minecraft.easyconfig.api.EasyConfig;
+import com.gmalvestiti.minecraft.liteconfig.api.ConfigHolder;
+import com.gmalvestiti.minecraft.liteconfig.api.LiteConfig;
 import com.gmalvestiti.minecraft.template.config.TemplateConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,9 +11,9 @@ public class TemplateCommon {
     public static final String MOD_ID = /*$ mod_id*/ "template";
     public static final Logger LOGGER = LoggerFactory.getLogger(TemplateCommon.MOD_ID);
 
-    public static ConfigHolder<TemplateConfig> CONFIG = EasyConfig.holder(TemplateConfig.class)
+    public static ConfigHolder<TemplateConfig> CONFIG = LiteConfig.holder(TemplateConfig.class)
         .modId(TemplateCommon.MOD_ID)
-        .createImmutable();
+        .create();
 
     public static void init() {
         if (CONFIG.data().enabled) {

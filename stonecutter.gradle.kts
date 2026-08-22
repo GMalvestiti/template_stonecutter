@@ -55,12 +55,15 @@ tasks {
         group = "custom"
         description = "Publish all versions to the Maven repository"
 
+        val isWindows = Os.isFamily(Os.FAMILY_WINDOWS)
         val isDryRun = project.findProperty("publish.dry_run")?.toString()?.toBoolean() ?: true
 
         if (isDryRun) {
-            dependsOn(stonecutter.tasks.named("publishToMavenLocal"))
+            commandLine(buildList {
+                if (isWindows) addAll(listOf("cmd", "/c", "gradlew.bat")) else add("./gradlew")
+                add("publishToMavenLocal")
+            })
         } else {
-            val isWindows = Os.isFamily(Os.FAMILY_WINDOWS)
             val isSnapshot = project.findProperty("dev.snapshot")?.toString()?.toBoolean() ?: false
             val autoRelease = project.findProperty("publish.auto_release")?.toString()?.toBoolean() ?: false
 
