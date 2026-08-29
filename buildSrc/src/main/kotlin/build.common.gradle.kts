@@ -257,6 +257,8 @@ afterEvaluate {
 
             environment.set(CLIENT_AND_SERVER)
             projectDescription.set(providers.fileContents(layout.projectDirectory.file("README.md")).asText)
+
+            requires("liteconfig")
         }
 
         curseforge {
@@ -273,6 +275,8 @@ afterEvaluate {
             server.set(prop("publish.curseforge_server").toBoolean())
             projectSlug.set(prop("publish.curseforge_slug"))
             changelogType.set("markdown")
+
+            requires("liteconfig")
         }
 
         dryRun.set(prop("publish.dry_run").toBoolean())

@@ -134,7 +134,7 @@ tasks {
             register("contact_issues", "mod.contact_issues")
             register("license", "mod.license")
             register("neoforge_loader", "deps.neoforge_loader")
-            register("liteconfig", "deps.liteconfig")
+            set("liteconfig", project.property("deps.liteconfig").toString().substringBefore("-"))
         }
 
         filesMatching("META-INF/neoforge.mods.toml") { expand(props) }
