@@ -1,7 +1,7 @@
 plugins {
     id("build.common")
     id("neoforge.mutex")
-    id("net.neoforged.moddev") version "2.0.142"
+    id("net.neoforged.moddev") version "2.0.144"
 }
 
 version = "${property("mod.version")}-${sc.current.version}"
