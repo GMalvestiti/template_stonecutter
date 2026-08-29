@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import static com.gmalvestiti.minecraft.template.TemplateCommon.CONFIG;
-
 public class TemplateMixinPlugin implements IMixinConfigPlugin {
 
     private String mixinPackage;
@@ -22,7 +20,7 @@ public class TemplateMixinPlugin implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         if (Objects.nonNull(this.mixinPackage) && mixinClassName.startsWith(this.mixinPackage)) {
-            return CONFIG.data().enabled;
+            return true;
         }
         return true;
     }

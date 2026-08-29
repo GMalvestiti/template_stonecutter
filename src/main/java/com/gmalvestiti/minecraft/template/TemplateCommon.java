@@ -16,7 +16,7 @@ public class TemplateCommon {
         .create();
 
     public static void init() {
-        if (CONFIG.data().enabled) {
+        if (CONFIG.data() != null) {
             TemplateCommon.info("Mod loaded.");
         } else {
             TemplateCommon.info("Mod disabled.");

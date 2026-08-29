@@ -10,9 +10,7 @@ import java.util.Map;
 @Config(name="template", comment=" Test", sync = true)
 public class TemplateConfig {
 
-    @Entry(name = "template_enabled", comment = "Whether the template is enabled or not")
-    public boolean enabled = true;
-
+    @Entry(name = "test_one", comment = "Test comment")
     public int test1 = 0;
 
     public List<String> testList = List.of("test1", "test2", "test3");
