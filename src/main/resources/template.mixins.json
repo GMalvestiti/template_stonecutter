@@ -4,7 +4,7 @@
   "package": "com.gmalvestiti.minecraft.template.mixin",
   "compatibilityLevel": "${java}",
   "mixins": [
-      "ServerLevelMixin"
+    "ItemMixin"
   ],
   "plugin": "com.gmalvestiti.minecraft.template.mixin.TemplateMixinPlugin",
   "injectors": {
