@@ -85,7 +85,6 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     testImplementation("org.mockito:mockito-core:${prop("deps.mockito")}")
-    testImplementation("org.mockito:mockito-junit-jupiter:${prop("deps.mockito")}")
 
     mockitoAgent("org.mockito:mockito-core:${prop("deps.mockito")}") {
         isTransitive = false
