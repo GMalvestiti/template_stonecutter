@@ -1,6 +1,6 @@
 package com.gmalvestiti.minecraft.template.datagen.neoforge.provider;
 
-//? if neoforge {
+//? if neoforge && datagen {
 /*import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import com.gmalvestiti.minecraft.template.TemplateCommon;

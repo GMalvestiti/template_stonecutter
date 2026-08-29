@@ -1,7 +1,7 @@
 package com.gmalvestiti.minecraft.template.datagen.fabric.provider;
 
-//? if fabric {
-import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+//? if fabric && datagen {
+/*import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.core.HolderLookup;
 import org.jspecify.annotations.NonNull;
@@ -19,4 +19,4 @@ public class EnglishLanguageProviderFabric extends FabricLanguageProvider {
 
     }
 }
-//?}
+*///?}

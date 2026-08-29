@@ -31,3 +31,10 @@ type="required"
 versionRange="[${neoforge_loader},)"
 ordering="NONE"
 side="BOTH"
+
+[[dependencies.${id}]]
+modId = "liteconfig"
+type = "required"
+versionRange = "[${liteconfig},)"
+ordering = "NONE"
+side = "BOTH"

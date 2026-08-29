@@ -1,7 +1,7 @@
 plugins {
     id("build.common")
     id("neoforge.mutex")
-    id("net.neoforged.moddev") version "2.0.143"
+    id("net.neoforged.moddev") version "2.0.144"
 }
 
 version = "${property("mod.version")}-${sc.current.version}"
@@ -93,12 +93,12 @@ neoForge {
 }
 
 dependencies {
-    jarJar(implementation("com.gmalvestiti.minecraft:liteconfig-neoforge:${property("deps.liteconfig")}") {
+    implementation("com.gmalvestiti.minecraft:liteconfig-neoforge") {
         version {
             strictly("[${property("deps.liteconfig")},)")
             prefer("${property("deps.liteconfig")}")
         }
-    })
+    }
 }
 
 tasks {

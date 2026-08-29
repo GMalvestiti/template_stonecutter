@@ -1,7 +1,7 @@
 package com.gmalvestiti.minecraft.template.datagen.fabric.provider;
 
-//? if fabric {
-import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+//? if fabric && datagen {
+/*import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -21,4 +21,4 @@ public class BiomeTagProviderFabric extends FabricTagsProvider<Biome> {
 
     }
 }
-//?}
+*///?}

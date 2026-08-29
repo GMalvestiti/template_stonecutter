@@ -1,7 +1,7 @@
 package com.gmalvestiti.minecraft.template.datagen.fabric;
 
-//? if fabric {
-import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
+//? if fabric && datagen {
+/*import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import com.gmalvestiti.minecraft.template.TemplateCommon;
 import com.gmalvestiti.minecraft.template.datagen.fabric.provider.BiomeTagProviderFabric;
@@ -23,4 +23,4 @@ public class DataGeneratorFabric implements DataGeneratorEntrypoint {
         return TemplateCommon.MOD_ID;
     }
 }
-//?}
+*///?}

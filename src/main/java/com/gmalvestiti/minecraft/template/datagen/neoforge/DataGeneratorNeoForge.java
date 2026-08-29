@@ -1,6 +1,6 @@
 package com.gmalvestiti.minecraft.template.datagen.neoforge;
 
-//? if neoforge {
+//? if neoforge && datagen {
 /*import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;

@@ -80,7 +80,6 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
 
     modImplementation("com.gmalvestiti.minecraft:liteconfig-fabric:${property("deps.liteconfig")}")
-    include("com.gmalvestiti.minecraft:liteconfig-fabric:${property("deps.liteconfig")}")
 
     testImplementation("net.fabricmc:fabric-loader-junit:${property("deps.fabric_loader")}")
 }
