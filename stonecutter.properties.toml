@@ -40,14 +40,14 @@ publish.dry_run=true
 
 deps.liteconfig="1.0.0-1.21"
 publish.start="1.21"
-publish.end="1.21.10"
+publish.end="1.21.11"
 
 [fabric."1.21"]
-mod.mc_compat=">=1.21 <=1.21.10"
+mod.mc_compat=">=1.21 <=1.21.11"
 deps.fabric_api="0.102.0+1.21"
 
 [neoforge."1.21"]
-mod.mc_compat="[1.21, 1.21.10]"
+mod.mc_compat="[1.21, 1.21.11]"
 deps.neoforge_loader="21.0.167"
 
 
