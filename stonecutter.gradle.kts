@@ -36,6 +36,8 @@ stonecutter parameters {
             replace("classTweaker v2 named", "classTweaker v2 official")
             replace("FabricDataOutput", "FabricPackOutput")
             replace("FabricTagProvider", "FabricTagsProvider")
+            replace("PayloadTypeRegistry.playS2C()", "PayloadTypeRegistry.clientboundPlay()")
+            replace("PayloadTypeRegistry.playC2S()", "PayloadTypeRegistry.serverboundPlay()")
         }
     }
 }
