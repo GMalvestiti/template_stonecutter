@@ -10,6 +10,8 @@ import java.util.Map;
 @Config(name="template", comment=" Test", sync = true)
 public class TemplateConfig {
 
+    public boolean enabled = true;
+
     @Entry(name = "test_one", comment = "Test comment")
     public int test1 = 0;
 

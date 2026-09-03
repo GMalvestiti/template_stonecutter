@@ -38,7 +38,7 @@ publish.dry_run=true
 
 ["1.21"]
 
-deps.liteconfig="1.0.0-1.21"
+deps.liteconfig="1.1.0-1.21"
 publish.start="1.21"
 publish.end="1.21.11"
 
@@ -53,7 +53,7 @@ deps.neoforge_loader="21.0.167"
 
 ["26.1"]
 
-deps.liteconfig="1.0.0-26.1"
+deps.liteconfig="1.1.0-26.1"
 publish.start="26.1"
 publish.end="latest"
 
