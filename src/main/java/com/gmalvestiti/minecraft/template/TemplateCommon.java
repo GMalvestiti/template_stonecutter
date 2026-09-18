@@ -3,6 +3,7 @@ package com.gmalvestiti.minecraft.template;
 import com.gmalvestiti.minecraft.liteconfig.api.ConfigHolder;
 import com.gmalvestiti.minecraft.liteconfig.api.LiteConfig;
 import com.gmalvestiti.minecraft.template.config.TemplateConfig;
+import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,7 +12,9 @@ public class TemplateCommon {
     public static final String MOD_ID = /*$ mod_id*/ "template";
     public static final Logger LOGGER = LoggerFactory.getLogger(TemplateCommon.MOD_ID);
 
-    public static ConfigHolder<TemplateConfig> CONFIG = LiteConfig.holder(TemplateConfig.class)
+    public static ConfigHolder<TemplateConfig> CONFIG = LiteConfig.holder(TemplateConfig.class, codecs -> codecs
+            .registerCodec(Identifier.class, Identifier.CODEC)
+            .registerStreamCodec(Identifier.class, Identifier.STREAM_CODEC))
         .modId(TemplateCommon.MOD_ID)
         .create();
 

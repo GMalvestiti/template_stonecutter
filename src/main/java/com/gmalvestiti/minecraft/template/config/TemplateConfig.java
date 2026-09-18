@@ -3,6 +3,7 @@ package com.gmalvestiti.minecraft.template.config;
 import com.gmalvestiti.minecraft.liteconfig.api.annotations.Config;
 import com.gmalvestiti.minecraft.liteconfig.api.annotations.Entry;
 import com.gmalvestiti.minecraft.liteconfig.api.annotations.Ignore;
+import net.minecraft.resources.Identifier;
 
 import java.util.List;
 import java.util.Map;
@@ -32,4 +33,6 @@ public class TemplateConfig {
 
     @Entry(restart = true)
     public int test6 = 0;
+
+    public Identifier testMinecraft = Identifier.parse("minecraft:stone");
 }
